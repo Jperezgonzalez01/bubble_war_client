@@ -1,11 +1,15 @@
 extends PlayerState
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+func _ready() -> void:
+	pass
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func enter(_msg := {}) -> void:
+	#Play falling animation --> animation_player.play_falling()
+	animation_player.play_idle()
+
+
+func update(delta: float) -> void:
+	if kinematic_player.is_in_ladder() or kinematic_player.is_on_floor():
+		state_machine.transition_to("IdleState")

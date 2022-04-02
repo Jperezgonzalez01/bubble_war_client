@@ -15,6 +15,10 @@ func _process(delta):
 		calculate_movement(delta)
 
 
+func _integrate_forces(state):
+	limit_speed(state)
+
+
 func _on_RigidBody2D_Bubble_body_entered(body):
 	collision_detected(body)
 

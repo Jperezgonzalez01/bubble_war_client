@@ -8,4 +8,6 @@ func _physics_process(delta):
 func _on_Bullet_body_entered(body):
 	if body.is_in_group("bubbles"):
 		body.emit_signal("bubble_destroyed")
+	if body.is_in_group("destructible_platforms"):
+		body.emit_signal("platform_destroyed")
 	queue_free()

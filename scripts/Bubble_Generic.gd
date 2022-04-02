@@ -9,6 +9,7 @@ const BOUNCE_IMPULSE_VELOCITY_Y = -50
 const BOUNCE_IMPULSE_VELOCITY_X = 100
 const INITIAL_IMPULSE_Y = -150
 const INITIAL_IMPULSE_X = 300
+const MAX_SPEED = 1000
 
 func init(initial_position:Vector2, initial_direction_x):
 	previous_position = initial_position
@@ -38,6 +39,11 @@ func calculate_movement(delta):
 	previous_position = current_position
 	previous_direction_y = current_direction_y
 	previous_direction_x = current_direction_x
+
+
+func limit_speed(state):
+	if state.linear_velocity.length() > MAX_SPEED:
+		state.linear_velocity = state.linear_velocity.normalized() * MAX_SPEED
 
 
 func is_in_group(group:String):

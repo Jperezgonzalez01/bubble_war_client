@@ -53,3 +53,12 @@ static func must_move_left():
 
 static func must_move_right():
 	return InputManager.get_input_force_x() > 0
+
+static func objects_on_same_position_x(static_object:Vector2, movement_object:Vector2, error_margin:int) -> bool:
+	return abs(static_object.x - movement_object.x) < error_margin
+
+static func objects_on_same_position_y(static_object:Vector2, movement_object:Vector2, error_margin:int) -> bool:
+	return abs(static_object.y - movement_object.y) < error_margin
+
+static func objects_on_same_position(static_object:Vector2, movement_object:Vector2, error_margin_x:int, error_margin_y:int) -> bool:
+	return abs(static_object.y - movement_object.y) < error_margin_y and abs(static_object.x - movement_object.x) < error_margin_x
