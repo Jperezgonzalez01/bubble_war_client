@@ -9,7 +9,11 @@ const BOUNCE_IMPULSE_VELOCITY_Y = -50
 const BOUNCE_IMPULSE_VELOCITY_X = 100
 const INITIAL_IMPULSE_Y = -150
 const INITIAL_IMPULSE_X = 300
-const MAX_SPEED = 1000
+const MIN_SPEED_X = 300
+const MIN_SPEED_Y = 600
+const MAX_SPEED_X = 300
+const MAX_SPEED_Y = 600
+const MAX_SPEED = 700
 
 func init(initial_position:Vector2, initial_direction_x):
 	previous_position = initial_position
@@ -44,6 +48,14 @@ func calculate_movement(delta):
 func limit_speed(state):
 	if state.linear_velocity.length() > MAX_SPEED:
 		state.linear_velocity = state.linear_velocity.normalized() * MAX_SPEED
+#	if state.linear_velocity.x > MAX_SPEED_X:
+#		state.linear_velocity.x = MAX_SPEED_X
+#	elif state.linear_velocity.x < MIN_SPEED_X:
+#		state.linear_velocity.x = MIN_SPEED_X
+#	if state.linear_velocity.y > MAX_SPEED_Y:
+#		state.linear_velocity.y = MAX_SPEED_Y
+#	elif state.linear_velocity.y < MIN_SPEED_Y:
+#		state.linear_velocity.y = MIN_SPEED_Y
 
 
 func is_in_group(group:String):
@@ -52,4 +64,4 @@ func is_in_group(group:String):
 
 func collision_detected(body:Node):
 	if body.is_in_group("players"):
-		get_tree().paused = true
+		body.player_died()

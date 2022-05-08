@@ -1,6 +1,6 @@
 extends "res://scripts/Bubble_Generic.gd"
 
-var child_scene = preload("res://scenes/Bubble_Medium.tscn")
+var child_scene = preload("res://objects/Bubble_Medium.tscn")
 
 onready var animation_bubble_large : AnimationPlayer = $AnimationPlayer_Bubble_Large
 

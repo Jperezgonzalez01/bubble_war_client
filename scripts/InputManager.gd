@@ -11,11 +11,29 @@ func get_input_force_x() -> int:
 	return velocity_x
 
 
+func get_just_pressed_input_force_x() -> int:
+	var velocity_x = 0
+	if Input.is_action_just_pressed("move_right"):
+		velocity_x += 1
+	if Input.is_action_just_pressed("move_left"):
+		velocity_x += -1
+	return velocity_x
+
+
 func get_input_force_y() -> int:
 	var velocity_y = 0
 	if Input.is_action_pressed("move_down"):
 		velocity_y += 1
 	if Input.is_action_pressed("move_up"):
+		velocity_y += -1
+	return velocity_y
+
+
+func get_just_pressed_input_force_y() -> int:
+	var velocity_y = 0
+	if Input.is_action_just_pressed("move_down"):
+		velocity_y += 1
+	if Input.is_action_just_pressed("move_up"):
 		velocity_y += -1
 	return velocity_y
 

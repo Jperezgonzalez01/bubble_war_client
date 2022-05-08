@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Luke-Bergs-Tropical-Soulmp3.mp3-5325d0b0438cba42fd9585ead7ff7a12.mp3str"
+
+[deps]
+
+source_file="res://sounds/Luke-Bergs-Tropical-Soulmp3.mp3"
+dest_files=[ "res://.import/Luke-Bergs-Tropical-Soulmp3.mp3-5325d0b0438cba42fd9585ead7ff7a12.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

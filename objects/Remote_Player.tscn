@@ -1,0 +1,334 @@
+[gd_scene load_steps=27 format=2]
+
+[ext_resource path="res://sprites/remote_player_spritesheet.png" type="Texture" id=1]
+[ext_resource path="res://scripts/remote/Remote_Player.gd" type="Script" id=2]
+[ext_resource path="res://scripts/PlayerStateMachine.gd" type="Script" id=3]
+[ext_resource path="res://scripts/remote/Remote_MovingRightState.gd" type="Script" id=4]
+[ext_resource path="res://scripts/remote/Remote_WonState.gd" type="Script" id=5]
+[ext_resource path="res://scripts/AnimationPlayer_Player.gd" type="Script" id=6]
+[ext_resource path="res://scripts/remote/Remote_MovingLeftState.gd" type="Script" id=7]
+[ext_resource path="res://scripts/remote/Remote_ShootingState.gd" type="Script" id=8]
+[ext_resource path="res://scripts/remote/Remote_DeadState.gd" type="Script" id=9]
+[ext_resource path="res://scripts/remote/Remote_IdleState.gd" type="Script" id=10]
+[ext_resource path="res://scripts/remote/Remote_FallingState.gd" type="Script" id=11]
+[ext_resource path="res://scripts/remote/Remote_ClimbingState.gd" type="Script" id=12]
+[ext_resource path="res://scripts/remote/Remote_DescendingState.gd" type="Script" id=13]
+[ext_resource path="res://sounds/mixkit-arcade-retro-game-over-213.wav" type="AudioStream" id=14]
+[ext_resource path="res://sounds/mixkit-short-laser-gun-shot-1670.wav" type="AudioStream" id=15]
+[ext_resource path="res://sounds/mixkit-video-game-win-2016.wav" type="AudioStream" id=16]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Climbing"
+length = 0.4
+loop = true
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite_Player:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 14, 15 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Dead"
+length = 2.0
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite_Player:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 11, 11, 11, 11, 11, 11, 11, 11, 11 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite_Player:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -25.0, 0.0, 25.0, 0.0, -25.0, 0.0, 45.0, 90.0 ]
+}
+tracks/2/type = "audio"
+tracks/2/path = NodePath("AudioStreamPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 14 )
+} ],
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Descending"
+length = 0.4
+loop = true
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite_Player:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 15, 14 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Falling"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite_Player:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 12, 13 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Idle"
+length = 0.25
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite_Player:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Moving_Left"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite_Player:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 4, 5, 6 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "Moving_Right"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite_Player:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 7, 8, 9, 10 ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite_Player:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CollisionPolygon2D_Moving_Left:polygon")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ PoolVector2Array( -3, -64, -6, -52, -22, -57, -12, -37, -17, -24, -8, -13, -33, -13, -33, -4, -22, 0, -22, 13, -13, 13, -4, 15, -4, 34, -15, 64, -21, 69, -21, 75, 27, 75, 27, 62, 17, 35, 17, -4, 24, -8, 31, -17, 31, -41, 21, -58 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "Shooting"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite_Player:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 1 ]
+}
+tracks/1/type = "audio"
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"clips": [ {
+"end_offset": 0.74,
+"start_offset": 0.05,
+"stream": ExtResource( 15 )
+} ],
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "Won"
+length = 3.0
+step = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite_Player:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 16, 17, 16, 17, 16, 17 ]
+}
+tracks/1/type = "audio"
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 16 )
+} ],
+"times": PoolRealArray( 0 )
+}
+
+[node name="KinematicBody2D_Player" type="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="Position2D_Weapon" type="Position2D" parent="."]
+position = Vector2( 2, -86 )
+
+[node name="AnimationPlayer_Player" type="AnimationPlayer" parent="."]
+anims/Climbing = SubResource( 1 )
+anims/Dead = SubResource( 2 )
+anims/Descending = SubResource( 3 )
+anims/Falling = SubResource( 4 )
+anims/Idle = SubResource( 5 )
+anims/Moving_Left = SubResource( 6 )
+anims/Moving_Right = SubResource( 7 )
+anims/RESET = SubResource( 8 )
+anims/Shooting = SubResource( 9 )
+anims/Won = SubResource( 10 )
+script = ExtResource( 6 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="Sprite_Player" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+hframes = 6
+vframes = 3
+frame = 2
+
+[node name="CollisionPolygon2D_Static" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PoolVector2Array( -22, 76, 19, 76, 19, 69, 15, 63, 15, 42, 18, 38, 18, -10, 15, -13, 22, -24, 22, -48, 32, -61, 21, -63, 24, -67, 8, -65, 11, -69, -2, -67, -10, -56, -25, -56, -32, -51, -21, -43, -28, -36, -28, -23, -21, -28, -21, -16, -15, -14, -21, -8, -21, 36, -18, 43, -18, 63, -22, 69 )
+
+[node name="CollisionPolygon2D_Moving_Left" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PoolVector2Array( -3, -64, -6, -52, -22, -57, -12, -37, -17, -24, -8, -13, -33, -13, -33, -4, -22, 0, -22, 13, -13, 13, -4, 15, -4, 34, -15, 64, -21, 69, -21, 75, 27, 75, 27, 62, 17, 35, 17, -4, 24, -8, 31, -17, 31, -41, 21, -58 )
+
+[node name="CollisionPolygon2D_Moving_Right" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PoolVector2Array( 22, -55, 11, -36, 17, -23, 6, -12, 32, -12, 32, -5, 21, 0, 21, 11, 11, 15, 3, 15, 3, 36, 15, 64, 21, 70, 21, 76, -27, 76, -27, 64, -16, 36, -15, -4, -24, -9, -31, -19, -31, -40, -21, -57, 1, -63 )
+
+[node name="CollisionPolygon2D_Climbing_Descending" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PoolVector2Array( 28, 9, 28, -40, 23, -40, 23, -48, 29, -62, 24, -66, 11, -69, -8, -55, -24, -51, -17, -44, -24, -38, -27, -38, -27, 8, -12, 9, -12, 59, -17, 59, -17, 75, 0, 75, 18, 75, 18, 58, 14, 58, 14, 9 )
+
+[node name="CollisionPolygon2D_Falling" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PoolVector2Array( 12, -2, 33, -2, 33, -49, 26, -53, 13, -52, 4, -63, -5, -66, -18, -63, -27, -58, -19, -46, -19, -39, -33, -39, -33, -1, -14, -1, -13, 59, -13, 64, -18, 64, -18, 75, 17, 75, 17, 64, 12, 64 )
+
+[node name="PlayerStateMachine" type="Node" parent="."]
+script = ExtResource( 3 )
+initial_state = NodePath("IdleState")
+
+[node name="IdleState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource( 10 )
+
+[node name="DeadState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource( 9 )
+
+[node name="WonState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource( 5 )
+
+[node name="MovingLeftState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource( 7 )
+
+[node name="MovingRightState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource( 4 )
+
+[node name="ShootingState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource( 8 )
+
+[node name="FallingState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource( 11 )
+
+[node name="ClimbingState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource( 12 )
+
+[node name="DescendingState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource( 13 )
+
+[connection signal="fire_weapon" from="PlayerStateMachine/ShootingState" to="." method="_on_ShootingState_fire_weapon"]

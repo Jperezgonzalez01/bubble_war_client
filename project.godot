@@ -33,14 +33,16 @@ _global_script_class_icons={
 [application]
 
 config/name="Bubble War Client"
-run/main_scene="res://scenes/Main.tscn"
-config/icon="res://sprites/icon.png"
+run/main_scene="res://scenes/Initial_Menu.tscn"
+config/icon="res://sprites/bubble_war_icon.png"
 
 [autoload]
 
 Global="*res://scripts/Global.gd"
 InputManager="*res://scripts/InputManager.gd"
 MovementUtils="*res://scripts/MovementUtils.gd"
+GuiKeyBinding="*res://scripts/GuiKeyBinding.gd"
+Network="*res://scripts/Network.gd"
 
 [display]
 

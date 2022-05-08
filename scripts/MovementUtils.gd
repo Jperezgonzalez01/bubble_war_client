@@ -61,4 +61,4 @@ static func objects_on_same_position_y(static_object:Vector2, movement_object:Ve
 	return abs(static_object.y - movement_object.y) < error_margin
 
 static func objects_on_same_position(static_object:Vector2, movement_object:Vector2, error_margin_x:int, error_margin_y:int) -> bool:
-	return abs(static_object.y - movement_object.y) < error_margin_y and abs(static_object.x - movement_object.x) < error_margin_x
+	return objects_on_same_position_x(static_object, movement_object, error_margin_x) and objects_on_same_position_y(static_object, movement_object, error_margin_y)

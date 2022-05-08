@@ -1,7 +1,7 @@
 extends PlayerState
 
 func _ready() -> void:
-	pass
+	state_name = "IdleState"
 
 
 func enter(_msg := {}) -> void:
@@ -9,7 +9,11 @@ func enter(_msg := {}) -> void:
 
 
 func update(delta: float) -> void:
-	if InputManager.get_input_force_x() > 0:
+	if kinematic_player.is_player_dead():
+		state_machine.transition_to("DeadState")
+	elif kinematic_player.is_player_winning():
+		state_machine.transition_to("WonState")
+	elif InputManager.get_input_force_x() > 0:
 		state_machine.transition_to("MovingRightState")
 	elif InputManager.get_input_force_x() < 0:
 		state_machine.transition_to("MovingLeftState")

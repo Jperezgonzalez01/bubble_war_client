@@ -1,0 +1,23 @@
+[gd_resource type="Theme" load_steps=7 format=2]
+
+[ext_resource path="res://styles/button_normal_styleboxtexture.tres" type="StyleBox" id=1]
+[ext_resource path="res://styles/button_pressed_styleboxtexture.tres" type="StyleBox" id=2]
+[ext_resource path="res://styles/button_hover_styleboxtexture.tres" type="StyleBox" id=3]
+[ext_resource path="res://styles/button_disabled_styleboxtexture.tres" type="StyleBox" id=4]
+[ext_resource path="res://fonts/acknowledge_dynamicfont_16.tres" type="DynamicFont" id=5]
+[ext_resource path="res://fonts/acknowledge_dynamicfont_32.tres" type="DynamicFont" id=6]
+
+[resource]
+Button/colors/font_color = Color( 0, 0, 0, 1 )
+Button/colors/font_color_focus = Color( 0, 0, 0, 1 )
+Button/colors/font_color_hover = Color( 0, 0, 0, 1 )
+Button/colors/font_color_pressed = Color( 0.176471, 0.176471, 0.176471, 1 )
+Button/fonts/font = ExtResource( 6 )
+Button/fonts/font_16 = ExtResource( 5 )
+Button/fonts/font_32 = ExtResource( 6 )
+Button/styles/disabled = ExtResource( 4 )
+Button/styles/hover = ExtResource( 3 )
+Button/styles/normal = ExtResource( 1 )
+Button/styles/pressed = ExtResource( 2 )
+Label/colors/font_color = Color( 0, 0, 0, 1 )
+Label/fonts/font = ExtResource( 6 )

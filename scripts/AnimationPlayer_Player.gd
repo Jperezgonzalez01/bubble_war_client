@@ -1,56 +1,66 @@
 extends AnimationPlayer
 
 
+var collisions_array = {}
+
+
 func _ready():
-	pass
+	collisions_array["CollisionPolygon2D_Static"] = get_parent().get_node("CollisionPolygon2D_Static")
+	collisions_array["CollisionPolygon2D_Moving_Right"] = get_parent().get_node("CollisionPolygon2D_Moving_Right")
+	collisions_array["CollisionPolygon2D_Moving_Left"] = get_parent().get_node("CollisionPolygon2D_Moving_Left")
+	collisions_array["CollisionPolygon2D_Climbing_Descending"] = get_parent().get_node("CollisionPolygon2D_Climbing_Descending")
+	collisions_array["CollisionPolygon2D_Falling"] = get_parent().get_node("CollisionPolygon2D_Falling")
 
-
-func _process(delta):
-	pass
 
 
 func play_idle():
 	play("Idle")
-	set_collision_idle()
+	set_collision("CollisionPolygon2D_Static")
 
 
 func play_moving_right():
 	play("Moving_Right")
-	set_collision_moving_right()
+	set_collision("CollisionPolygon2D_Moving_Right")
 
 
 func play_moving_left():
 	play("Moving_Left")
-	set_collision_moving_left()
+	set_collision("CollisionPolygon2D_Moving_Left")
 
 
 func play_shooting():
 	play("Shooting")
-	set_collision_idle()
+	set_collision("CollisionPolygon2D_Static")
 
 
-func set_collision_moving_right():
-	get_parent().get_node("CollisionPolygon2D_Static").disabled= true
-	get_parent().get_node("CollisionPolygon2D_Static").visible= false
-	get_parent().get_node("CollisionPolygon2D_Moving_Right").disabled= false
-	get_parent().get_node("CollisionPolygon2D_Moving_Right").visible= true
-	get_parent().get_node("CollisionPolygon2D_Moving_Left").disabled= true
-	get_parent().get_node("CollisionPolygon2D_Moving_Left").visible= false
+func play_climbing():
+	play("Climbing")
+	set_collision("CollisionPolygon2D_Climbing_Descending")
 
 
-func set_collision_moving_left():
-	get_parent().get_node("CollisionPolygon2D_Static").disabled= true
-	get_parent().get_node("CollisionPolygon2D_Static").visible= false
-	get_parent().get_node("CollisionPolygon2D_Moving_Right").disabled= true
-	get_parent().get_node("CollisionPolygon2D_Moving_Right").visible= false
-	get_parent().get_node("CollisionPolygon2D_Moving_Left").disabled= false
-	get_parent().get_node("CollisionPolygon2D_Moving_Left").visible= true
+func play_descending():
+	play("Descending")
+	set_collision("CollisionPolygon2D_Climbing_Descending")
 
 
-func set_collision_idle():
-	get_parent().get_node("CollisionPolygon2D_Static").disabled= false
-	get_parent().get_node("CollisionPolygon2D_Static").visible= true
-	get_parent().get_node("CollisionPolygon2D_Moving_Right").disabled= true
-	get_parent().get_node("CollisionPolygon2D_Moving_Right").visible= false
-	get_parent().get_node("CollisionPolygon2D_Moving_Left").disabled= true
-	get_parent().get_node("CollisionPolygon2D_Moving_Left").visible= false
+func play_falling():
+	play("Falling")
+	set_collision("CollisionPolygon2D_Falling")
+
+
+func play_dead():
+	play("Dead")
+
+
+func play_won():
+	play("Won")
+
+
+func set_collision(key:String):
+	for value in collisions_array.values():
+		value.disabled= true
+		value.visible= false
+	var current_collision = collisions_array.get(key)
+	if current_collision != null:
+		current_collision.disabled= false
+		current_collision.visible= true

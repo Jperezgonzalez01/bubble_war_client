@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Ghostrifter-Official-Deflector.mp3-f278c20d044906f683a0f3f649cb6ceb.mp3str"
+
+[deps]
+
+source_file="res://sounds/Ghostrifter-Official-Deflector.mp3"
+dest_files=[ "res://.import/Ghostrifter-Official-Deflector.mp3-f278c20d044906f683a0f3f649cb6ceb.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
