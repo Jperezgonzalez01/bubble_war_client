@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://sprites/android_joystick.png" type="Texture" id=1]
+[ext_resource path="res://scripts/Android_Joystick.gd" type="Script" id=2]
+[ext_resource path="res://sprites/finger_pointer.png" type="Texture" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 80.0
+
+[node name="Android_Joystick" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+normal = ExtResource( 1 )
+shape = SubResource( 1 )
+
+[node name="Sprite_Finger_Pointer" type="Sprite" parent="."]
+position = Vector2( 80, 80 )
+texture = ExtResource( 3 )
+
+[connection signal="released" from="TouchScreenButton" to="." method="_on_TouchScreenButton_released"]

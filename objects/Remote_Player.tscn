@@ -330,5 +330,3 @@ script = ExtResource( 12 )
 
 [node name="DescendingState" type="Node" parent="PlayerStateMachine"]
 script = ExtResource( 13 )
-
-[connection signal="fire_weapon" from="PlayerStateMachine/ShootingState" to="." method="_on_ShootingState_fire_weapon"]

@@ -1,6 +1,7 @@
 extends StaticBody2D
 
 signal platform_destroyed()
+signal remote_platform_destroyed()
 
 
 func is_in_group(group:String):

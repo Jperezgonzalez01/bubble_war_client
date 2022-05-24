@@ -9,8 +9,7 @@ var key_dict = {
 		"move_up":87,
 		"move_down":83
 	}
-				
-var setting_key = false
+
 
 func _ready():
 	load_keys()
@@ -28,17 +27,19 @@ func load_keys():
 			key_dict = data
 			setup_keys()
 		else:
-			printerr("corrupted data!")
+			printerr("corrupted keybindings data!")
 	else:
 		#NoFile, so lets save the default keys now
 		save_keys()
-	
+
+
 func delete_old_keys():
 	#Remove the old keys
 	for i in key_dict:
 		var oldkey = InputEventKey.new()
 		oldkey.scancode = int(self.key_dict[i])
 		InputMap.action_erase_event(i,oldkey)
+
 
 func setup_keys():
 	for i in key_dict:
@@ -48,7 +49,8 @@ func setup_keys():
 		var newkey = InputEventKey.new()
 		newkey.scancode = int(key_dict[i])
 		InputMap.action_add_event(i,newkey)
-	
+
+
 func save_keys():
 	var file = File.new()
 	file.open(file_name,File.WRITE)

@@ -17,9 +17,6 @@ margin_left = 1012.0
 margin_top = 266.0
 margin_right = 1739.0
 margin_bottom = 660.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="players_in_lobby_list" type="ItemList" parent="."]
 margin_left = 122.0

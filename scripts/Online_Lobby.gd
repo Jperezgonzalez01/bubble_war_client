@@ -3,7 +3,7 @@ extends Node2D
 var lobby_type = ""
 var delta_count = 0
 var current_lobby_id = 0
-var player_info = {"lobby_id": 0, "current_lobby_players": []}
+var lobby_info = {"lobby_id": 0, "current_lobby_players": []}
 var other_lobbies = []
 var selected_lobby = 0
 
@@ -31,8 +31,8 @@ func _process(delta):
 
 
 func update_lobby(lobby_response):
-	player_info["lobby_id"] = lobby_response[0]
-	player_info["current_lobby_players"] = lobby_response[1]
+	lobby_info["lobby_id"] = lobby_response[0]
+	lobby_info["current_lobby_players"] = lobby_response[1]
 
 
 func set_available_lobbies(lobbies):
@@ -40,7 +40,7 @@ func set_available_lobbies(lobbies):
 
 
 func update_buttons():
-	if player_info["lobby_id"] == 0:
+	if lobby_info["lobby_id"] == 0:
 		$join_to_lobby_btn.set_text("Join to lobby")
 		$create_lobby_btn.disabled = false
 		$play_btn.disabled = true
@@ -53,11 +53,11 @@ func update_buttons():
 
 
 func refresh_local_player_lobby_info():
-	current_lobby_id = player_info["lobby_id"]
+	current_lobby_id = lobby_info["lobby_id"]
 	var current_lobby_text = "Not in a lobby" if current_lobby_id == 0 else str(current_lobby_id)
 	$current_lobby_text.set_text(current_lobby_text)
 	$players_in_lobby_list.clear()
-	for player_id in player_info["current_lobby_players"]:
+	for player_id in lobby_info["current_lobby_players"]:
 		$players_in_lobby_list.add_item(str(player_id))
 
 
@@ -72,7 +72,7 @@ func _on_create_join_lobby_btn_pressed():
 
 
 func _on_join_to_lobby_btn_pressed():
-	if player_info["lobby_id"] == 0:
+	if lobby_info["lobby_id"] == 0:
 		if selected_lobby != 0:
 			Network.s_add_player_to_lobby(selected_lobby)
 	else:

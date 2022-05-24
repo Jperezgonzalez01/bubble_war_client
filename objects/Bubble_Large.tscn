@@ -81,3 +81,4 @@ anims/RESET = SubResource( 4 )
 
 [connection signal="body_entered" from="." to="." method="_on_RigidBody2D_Bubble_body_entered"]
 [connection signal="bubble_destroyed" from="." to="." method="_on_RigidBody2D_Bubble_Large_bubble_destroyed"]
+[connection signal="remote_bubble_destroyed" from="." to="." method="_on_RigidBody2D_Bubble_Large_remote_bubble_destroyed"]

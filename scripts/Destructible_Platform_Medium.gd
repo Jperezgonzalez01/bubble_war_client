@@ -6,5 +6,9 @@ func _ready():
 	pass
 
 
-func _on_Destructible_Platform_Medium_platform_destroyed():
+func _on_Destructible_Platform_Medium_platform_destroyed(body):
+	destroy_platform()
+
+
+func _on_Destructible_Platform_Medium_remote_platform_destroyed():
 	destroy_platform()

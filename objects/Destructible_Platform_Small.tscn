@@ -16,3 +16,4 @@ texture = ExtResource( 1 )
 shape = SubResource( 6 )
 
 [connection signal="platform_destroyed" from="." to="." method="_on_Destructible_Platform_Small_platform_destroyed"]
+[connection signal="remote_platform_destroyed" from="." to="." method="_on_Destructible_Platform_Small_remote_platform_destroyed"]

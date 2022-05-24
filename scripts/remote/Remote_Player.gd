@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-const BulletScene = preload("res://objects/Bullet.tscn")
+const BulletScene = preload("res://objects/Remote_Bullet.tscn")
 
 const GRAVITY = 500
 
@@ -34,7 +34,8 @@ func set_state(state_name):
 
 func emit_shoot():
 	if $PlayerStateMachine.get_current_state_name() == "ShootingState":
-			$PlayerStateMachine.get_state().set_emit_shoot_true()
+		$PlayerStateMachine.get_state().set_emit_shoot_true()
+		
 
 
 func set_remote_player_id(id:int) -> void:
@@ -73,7 +74,8 @@ func is_player_winning():
 	return player_won
 
 
-func _on_ShootingState_fire_weapon():
+func create_remote_bullet_at_position(bullet_index, bullet_position):
 	var new_bullet = BulletScene.instance()
 	owner.add_child(new_bullet)
-	new_bullet.set_global_position($Position2D_Weapon.get_global_position())
+	owner.remote_bullets_dict[bullet_index] = new_bullet
+	new_bullet.set_global_position(bullet_position)

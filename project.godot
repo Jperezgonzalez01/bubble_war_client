@@ -43,11 +43,13 @@ InputManager="*res://scripts/InputManager.gd"
 MovementUtils="*res://scripts/MovementUtils.gd"
 GuiKeyBinding="*res://scripts/GuiKeyBinding.gd"
 Network="*res://scripts/Network.gd"
+Configuration="*res://scripts/Configuration.gd"
 
 [display]
 
 window/size/width=1920
 window/size/height=1080
+window/size/resizable=false
 window/stretch/mode="viewport"
 
 [input]
@@ -113,6 +115,10 @@ move_down={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
 
 [physics]
 

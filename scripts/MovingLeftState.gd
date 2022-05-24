@@ -23,5 +23,7 @@ func update(delta: float) -> void:
 
 		if !kinematic_player.is_in_ladder() and !kinematic_player.is_on_floor():
 			state_machine.transition_to("FallingState")
+	elif force_x > 0:
+		state_machine.transition_to("MovingRightState")
 	elif force_x == 0:
 		state_machine.transition_to("IdleState")

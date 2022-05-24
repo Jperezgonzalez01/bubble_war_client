@@ -1,6 +1,7 @@
 extends RigidBody2D
 
 signal bubble_destroyed()
+signal remote_bubble_destroyed()
 
 var previous_position
 var previous_direction_y

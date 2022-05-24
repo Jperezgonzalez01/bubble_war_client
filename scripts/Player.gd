@@ -58,16 +58,49 @@ func player_won():
 func is_player_winning():
 	return player_won
 
+
 func get_current_animation():
 	return $AnimationPlayer_Player.current_animation
+
 
 func get_current_state():
 	return $PlayerStateMachine.get_current_state_name()
 
 
 func _on_ShootingState_fire_weapon():
+	var online_player_info = Network.get_online_player_info()
+	
+	# Online play (coop or versus)
+	if current_game_id != 0:
+		var new_bullet = create_new_bullet(Vector2(0, 1), 0)
+		new_bullet.connect("bullet_destoyed", owner, "send_destroy_remote_bullet")
+		owner.local_bullets_array.append(new_bullet)
+		var index = owner.local_bullets_array.find(new_bullet)
+		Network.s_player_emit_shoot(current_game_id, index, $Position2D_Weapon.get_global_position())
+	# Offline play (story mode)
+	# Story mode loged in
+	elif online_player_info != null:
+		# Double shoot boost
+		if online_player_info["SELECTED_BOOST_NAME"] == "Double shoot":
+			create_new_bullet(Vector2(0.33, 1), -0.58)
+			create_new_bullet(Vector2(-0.33, 1), 0.58)
+		# Triple shoot boost
+		elif online_player_info["SELECTED_BOOST_NAME"] == "Triple shoot":
+			create_new_bullet(Vector2(0.33, 1), -0.58)
+			create_new_bullet(Vector2(0, 1), 0)
+			create_new_bullet(Vector2(-0.33, 1), 0.58)
+		# No shoot boost
+		else:
+			create_new_bullet(Vector2(0, 1), 0)
+	# Story mode not loged in
+	else:
+		create_new_bullet(Vector2(0, 1), 0)
+
+
+func create_new_bullet(direction_vector, rotation_radians):
 	var new_bullet = BulletScene.instance()
 	owner.add_child(new_bullet)
 	new_bullet.set_global_position($Position2D_Weapon.get_global_position())
-	if current_game_id != 0:
-		Network.s_player_emit_shoot(current_game_id)
+	new_bullet.direction = direction_vector
+	new_bullet.rotate(rotation_radians)
+	return new_bullet

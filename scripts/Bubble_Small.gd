@@ -23,7 +23,7 @@ func _on_RigidBody2D_Bubble_body_entered(body):
 	collision_detected(body)
 
 
-func _on_RigidBody2D_Bubble_Small_bubble_destroyed():
+func _on_RigidBody2D_Bubble_Small_bubble_destroyed(bubble):
 	set_sleeping(true)
 	gravity_scale = 0
 	animation_bubble_small.play("Exploding")
@@ -33,3 +33,9 @@ func destroy_bubble(animation_name):
 	if animation_name == "Exploding":
 		get_parent().delete_bubble(self)
 		queue_free()
+
+
+func _on_RigidBody2D_Bubble_Small_remote_bubble_destroyed():
+	set_sleeping(true)
+	gravity_scale = 0
+	animation_bubble_small.play("Exploding")

@@ -1,8 +1,7 @@
 extends PlayerState
 
-signal fire_weapon()
-
 var emit_shoot = false
+
 
 func _ready() -> void:
 	state_name = "ShootingState"
@@ -23,5 +22,4 @@ func update(delta: float) -> void:
 		state_machine.transition_to("WonState")
 	elif emit_shoot:
 		animation_player.play_shooting()
-		emit_signal("fire_weapon")
 		emit_shoot = false
