@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-var file_name = "res://config/keybinding.json"
+var file_path = "user://keybinding.json"
 
 var key_dict = {
 		"shoot":32,
@@ -18,9 +18,9 @@ func _ready():
 #We'll use this when the game loads
 func load_keys():
 	var file = File.new()
-	if(file.file_exists(file_name)):
+	if(file.file_exists(file_path)):
 		delete_old_keys()
-		file.open(file_name,File.READ)
+		file.open(file_path,File.READ)
 		var data = parse_json(file.get_as_text())
 		file.close()
 		if(typeof(data) == TYPE_DICTIONARY):
@@ -53,6 +53,6 @@ func setup_keys():
 
 func save_keys():
 	var file = File.new()
-	file.open(file_name,File.WRITE)
+	file.open(file_path,File.WRITE)
 	file.store_string(to_json(key_dict))
 	file.close()

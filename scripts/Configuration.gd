@@ -1,6 +1,6 @@
 extends Node
 
-var config_file = "res://config/configuration.json"
+var config_file = "user://configuration.json"
 
 var config_dict = {
 		"sound_volume":100,
